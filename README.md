@@ -1,19 +1,43 @@
-# django-grappelli-extensions [![Build Status](https://travis-ci.org/django-grappelli-extensions/django-grappelli-extensions.png?branch=master)](https://travis-ci.org/django-grappelli-extensions/django-grappelli-extensions)
+# django-grappelli-extensions
+
+[![Test Status](https://travis-ci.org/mauler/django-grappelli-extensions.png?branch=master)](https://travis-ci.org/mauler/django-grappelli-extensions)
+
+[![Code Health](https://landscape.io/github/mauler/django-grappelli-extensions/master/landscape.png)](https://landscape.io/github/mauler/django-grappelli-extensions/master)
+
+[![Latest PyPI version](https://pypip.in/v/django-grappelli-extensions/badge.png)](https://crate.io/packages/django-grappelli-extensions/)
+
+[![Number of PyPI downloads](https://pypip.in/d/django-grappelli-extensions/badge.png)](https://crate.io/packages/django-grappelli-extensions/)
 
 
 Available features:
 * [Header navbar](#navbar)
 * [Left sidebar](#sidebar)
 
-#### Installation
+* Python > 2.6
+* django-grappelli >= 2.4.5
+* Django >= 1.4
 
-* Python 2.6, 2.7, django-grappelli >= 2.4.5 and Django >= 1.4
-* Simply ```pip install django-grappelli-extensions``` and put ```grappelli_extensions``` **before** ```grappelli``` on INSTALLED_APPS.
+# Installation
+
+* ```pip install django-grappelli-extensions```
+* Put ```grappelli_extensions``` **before** ```grappelli``` on INSTALLED_APPS.
 
 
-## navbar
+## settings.py
 
-![Navigation bar](https://github.com/django-grappelli-extensions/django-grappelli-extensions/raw/master/screenshot.jpg)
+ * Put 'grappelli_extensions' **before** 'grappelli' on INSTALLED_APPS
+ * Put 'apptemplates.Loader' on your TEMPLATE_LOADERS setting:
+
+```python
+# Your setting will look like:
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'apptemplates.Loader',
+)
+```
+
+![Navigation bar](https://github.com/mauler/django-grappelli-extensions/raw/master/screenshot.jpg)
 
 Set the class that will generate your navigation bar:
 
@@ -23,7 +47,7 @@ GRAPPELLI_EXTENSIONS_NAVBAR = 'extensions.Navbar'
 
 ## sidebar
 
-![Navigation bar](https://github.com/django-grappelli-extensions/django-grappelli-extensions/raw/master/sidebar_screenshot.jpg)
+![Navigation bar](https://github.com/mauler/django-grappelli-extensions/raw/master/sidebar_screenshot.jpg)
 
 Set the class that will generate your sidebar:
 ```python
@@ -59,7 +83,7 @@ class Navbar(object):
     )
 ```
 
-**IMPORTANT:** Sidebar class follows the very same structure.
+**IMPORTANT:** Sidebar class follows the very same structure (But only use root nodes).
 
 ## To run tests
 
@@ -71,43 +95,8 @@ export DJANGO_SETTINGS_MODULE=grappelli_extensions.test_settings
 
 ## Contributing
 
-1. Read the features ROADMAP.
-2. Fork it.
-3. Create your feature branch. (`git checkout -b my-new-feature`)
-4. Commit your changes. (`git commit -am 'Add some feature'`)
-5. Push to the branch. (`git push origin my-new-feature`)
-6. Create new Pull Request.
-
-
-## Features
-
-##### ROADMAP for 0.1.2
-
-[x] Custom left sidebard.
-
-[x] Make travis.yml file using grappelli-extensions account.
-
-[ ] Improve documentation and some texts about the grappelli extensions.
-
-
-##### ROADMAP for 0.1.3
-
-[ ] Static site on http://django-grappelli-extensions.github.io
-
-[ ] Customized icons for navbar.
-
-[ ] Customized icons for sidebar.
-
-[ ] Customized icons for dashboard.
-
-
-##### ROADMAP for 0.1.4
-
-[ ] Create some skins themes.
-
-[ ] Custom columns for Grappelli Dashboard.
-
-
-##### ROADMAP for 0.1.5
-
-[ ] Redesign Grappelli Dashboard.
+1. Fork it.
+2. Create your feature branch. (`git checkout -b my-new-feature`)
+3. Commit your changes. (`git commit -am 'Add some feature'`)
+4. Push to the branch. (`git push origin my-new-feature`)
+5. Create new Pull Request.

@@ -2,9 +2,9 @@
 
 import sys
 
-from django.conf import settings
-
 from django import template
+from django.conf import settings
+from django.templatetags.static import static
 
 from classytags.core import Tag, Options
 from classytags.helpers import InclusionTag
@@ -27,6 +27,10 @@ def get_navbar():
 def get_sidebar():
     return get_extension('GRAPPELLI_EXTENSIONS_SIDEBAR',
                          'grappelli_extensions.navbar.Navbar')
+
+
+def get_theme():
+    return getattr(settings, 'GRAPPELLI_THEME', None)
 
 
 def has_perms(request, params):
@@ -100,11 +104,27 @@ class GrappelliHasSidebar(Tag):
     def render_tag(self, context, nodelist):
         output = ''
         sidebar = get_sidebar()
-        if(len(sidebar.nodes)):
+        if len(sidebar.nodes):
             output = nodelist.render(context)
         return output
+
+
+class GrappelliTheme(Tag):
+    name = 'grappelli_theme'
+
+    def render_tag(self, context):
+        theme = get_theme()
+        if not theme:
+            return ''
+
+        theme_static_url = static('css/%s.css' % (theme, ))
+        output = '<link href=%s rel="stylesheet" type="text/css"\
+                 media="screen" />' % (theme_static_url, )
+        return output
+
 
 register = template.Library()
 register.tag(GrappelliNavbar)
 register.tag(GrappelliSidebar)
 register.tag(GrappelliHasSidebar)
+register.tag(GrappelliTheme)
