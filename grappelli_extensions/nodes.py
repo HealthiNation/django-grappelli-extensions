@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 
 from django.core.urlresolvers import reverse
-from django.db.models.loading import get_model
+from django.apps import apps
 
 
 class Node(object):
@@ -16,7 +16,7 @@ class CLNode(Node):
         self.perms = perms
 
     def as_tuple(self):
-        model = get_model(self.app, self.model)
+        model = apps.get_model(self.app, self.model)
         vnp = model._meta.verbose_name_plural
         if self.title is None:
             title = \
